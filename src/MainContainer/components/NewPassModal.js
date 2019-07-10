@@ -1,6 +1,6 @@
 import React from 'react'
-import './LoginModal.css'
-import {useInput} from '../Functions/useInput'
+//import './NewPassModal.css'
+import {useInput} from '../../Functions/useInput'
 
 const LoginModal = (props) => {
 
@@ -9,8 +9,11 @@ const LoginModal = (props) => {
 
     const clicked = (e) => {
         e.preventDefault()
-        const pass = value
-        props.logIn(pass)
+        if (value != "") {
+            const service = value
+            props.addToList(service)
+            props.closeModal()
+        }
     }
 
     return(
@@ -20,17 +23,18 @@ const LoginModal = (props) => {
                     <table id="loginTable">
                         <tr>
                             <td style={{width: "100%", borderBottom: "1px solid #888", fontSize: "120%"}}>
-                                <div>Logga in</div>
+                                <div>Add a new item</div>
                             </td> 
                         </tr>
                         <tr>
                             <td>
-                                <input className="loginInput" placeholder="Password..." type="password" {...bind} autoFocus={true} />
+                                <input className="loginInput" placeholder="Service name" type="text" {...bind} autoFocus={true} />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <button id="loginButton" onClick="submit">Log in</button>
+                                <button id="loginButton" onClick="submit">Create</button>
+                                <button id="loginButton" onClick={props.closeModal}>Cancel</button>
                             </td>
                         </tr>
                     </table>
